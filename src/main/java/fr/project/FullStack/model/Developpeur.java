@@ -1,10 +1,14 @@
 package fr.project.FullStack.model;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,13 +18,14 @@ import java.util.Set;
 @Builder
 @Table(name="Developpeur")
 public class Developpeur {
-    @ManyToMany(mappedBy = "gererbug")
-    Set<Bug> bugs;
-
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    private String nom;
+    private String name;
     private String firstName;
+    private String poste;
+
+    @ManyToMany(mappedBy = "devs")
+    List<Bug> bugs;
 
 
 

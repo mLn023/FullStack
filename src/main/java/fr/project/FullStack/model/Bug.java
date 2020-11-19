@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,12 +25,7 @@ public class Bug {
     private String status;
 
     @ManyToMany
-    @JoinTable(
-            name ="bug_devs",
-            joinColumns = @JoinColumn(name="developpeur_id"),
-            inverseJoinColumns = @JoinColumn(name = "bug_id")
-    )
-    private Set<Developpeur> devs;
+    private List<Developpeur> devs;
 
 
 }

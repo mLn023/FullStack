@@ -10,6 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateDeveloppeur {
-    private String nom;
-    private String first_name;
+    private String name;
+    private String firstName;
+    private String poste;
 }
