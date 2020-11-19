@@ -1,6 +1,5 @@
 package fr.project.FullStack.model;
 
-import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
@@ -25,8 +24,13 @@ public class Bug {
     private String nom;
     private String status;
 
-    @OneToMany (mappedBy = "Developpeur")
-    private Set<Bug> Bugs;
+    @ManyToMany
+    @JoinTable(
+            name ="bug_devs",
+            joinColumns = @JoinColumn(name="developpeur_id"),
+            inverseJoinColumns = @JoinColumn(name = "bug_id")
+    )
+    private Set<Developpeur> devs;
 
 
 }

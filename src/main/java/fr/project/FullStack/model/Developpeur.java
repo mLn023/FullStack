@@ -4,6 +4,7 @@ package fr.project.FullStack.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,9 +14,8 @@ import javax.persistence.*;
 @Builder
 @Table(name="Developpeur")
 public class Developpeur {
-    @ManyToOne
-    @JoinColumn(name="developpeur_id", nullable= true)
-    private Developpeur developpeur;
+    @ManyToMany(mappedBy = "gererbug")
+    Set<Bug> bugs;
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
