@@ -15,9 +15,9 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
-
+@AllArgsConstructor
 @Entity
+@Builder
 @Table(name="Bug")
 public class Bug {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)

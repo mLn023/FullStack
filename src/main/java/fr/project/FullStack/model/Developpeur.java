@@ -1,20 +1,16 @@
 package fr.project.FullStack.model;
 
 
-import javax.persistence.*;
+import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import javax.persistence.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
-
+@AllArgsConstructor
 @Entity
+@Builder
 @Table(name="Developpeur")
 public class Developpeur {
     @ManyToOne

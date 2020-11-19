@@ -1,4 +1,5 @@
-
+CREATE TABLE Developpeur
+CREATE TABLE Bug
 INSERT INTO Developpeur (id, name, first_name, poste) VALUES
   (1, 'Henry', 'Mhilan', 'Junior'),
   (2, 'Hollertt', 'Marceau', 'Junior'),
