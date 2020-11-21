@@ -29,11 +29,13 @@ public class Bug {
     private String status;
     private String created_at;
 
-    @ManyToMany
-    private List<Developpeur> Listedevs;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name="developpeur_id")
+    private Developpeur developpeur;
 
     @OneToMany(mappedBy = "bug")
     @JsonManagedReference
-    private List<Commentary> Listecoms;
+    private List<Commentary> listecoms;
 
 }

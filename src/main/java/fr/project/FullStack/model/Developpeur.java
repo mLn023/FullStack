@@ -25,13 +25,13 @@ public class Developpeur {
     private String firstname;
     private String function;
 
-    @ManyToMany(mappedBy = "Listedevs")
+    @OneToMany(mappedBy = "developpeur")
     @JsonManagedReference
-    List<Bug> Listebugs;
+    private List<Bug> listebugs;
 
     @OneToMany(mappedBy = "developpeur")
     @JsonManagedReference
-    private List<Commentary> ListComs;
+    private List<Commentary> listecoms;
 
 
 }

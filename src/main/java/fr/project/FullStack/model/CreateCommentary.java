@@ -15,6 +15,4 @@ import java.util.Date;
 public class CreateCommentary {
     private String description;
     private Date created_at;
-    private Developpeur developpeur;
-    private Bug bug;
 }

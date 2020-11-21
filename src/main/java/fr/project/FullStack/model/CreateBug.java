@@ -11,5 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CreateBug {
     private String name;
+    private String priority;
     private String status;
+
 }
