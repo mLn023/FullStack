@@ -3,6 +3,8 @@ package fr.project.FullStack.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,10 +24,16 @@ public class Bug {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String nom;
+    private String description;
+    private String priority;
     private String status;
+    private String created_at;
 
     @ManyToMany
-    private List<Developpeur> devs;
+    private List<Developpeur> Listedevs;
 
+    @OneToMany(mappedBy = "bug")
+    @JsonManagedReference
+    private List<Commentary> Listecoms;
 
 }

@@ -1,6 +1,7 @@
 package fr.project.FullStack.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,12 +22,16 @@ public class Developpeur {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String firstName;
-    private String poste;
+    private String firstname;
+    private String function;
 
-    @ManyToMany(mappedBy = "devs")
-    List<Bug> bugs;
+    @ManyToMany(mappedBy = "Listedevs")
+    @JsonManagedReference
+    List<Bug> Listebugs;
 
+    @OneToMany(mappedBy = "developpeur")
+    @JsonManagedReference
+    private List<Commentary> ListComs;
 
 
 }
