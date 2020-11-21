@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface DeveloppeurRepository extends JpaRepository<Developpeur,Integer>{
     Optional<Developpeur> findById(Integer id);
+
 }

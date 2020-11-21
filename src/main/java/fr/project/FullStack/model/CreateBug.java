@@ -13,5 +13,6 @@ public class CreateBug {
     private String name;
     private String priority;
     private String status;
-
+    private String description;
+    private String created_at;
 }

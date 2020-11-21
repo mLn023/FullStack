@@ -23,7 +23,7 @@ import java.util.List;
 public class Bug {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    private String nom;
+    private String name;
     private String description;
     private String priority;
     private String status;

@@ -15,22 +15,22 @@ import java.util.List;
 public class DeveloppeursRoute {
 
     @Autowired
-    DeveloppeurRepository DeveloppeurRepository;
+    DeveloppeurRepository developpeurRepository;
 
     @GetMapping("/devs/{id}")
     public Developpeur getDeveloppeur(@PathVariable("id") Integer id) {
-        return DeveloppeurRepository.findById(id).orElse(null);
+        return developpeurRepository.findById(id).orElse(null);
 
     }
 
     @GetMapping("/devs")
     public List<Developpeur> getAllDevs() {
-        return DeveloppeurRepository.findAll();
+        return developpeurRepository.findAll();
     }
 
     @PostMapping("/devs")
     public Developpeur CreateDeveloppeur (@Validated @RequestBody CreateDeveloppeur nouveauDev){
-        return DeveloppeurRepository.save(Developpeur
+        return developpeurRepository.save(Developpeur
         .builder()
                 .name(nouveauDev.getName())
                 .firstname(nouveauDev.getFirstname())
@@ -41,16 +41,16 @@ public class DeveloppeursRoute {
     @PutMapping(value = "/devs/{id}",consumes = {"application/json"})
     public Developpeur updateDeveloppeur(@PathVariable("id") Integer id, @Validated @RequestBody Developpeur devs)
     {
-        if(!DeveloppeurRepository.existsById(id)){
+        if(!developpeurRepository.existsById(id)){
             //exception a faire
             return null;
         }
 
-        return DeveloppeurRepository.findById(id)
+        return developpeurRepository.findById(id)
                 .map(developpeur -> {
                 developpeur.setName(devs.getName());
                 developpeur.setFirstname(devs.getFirstname());
                 developpeur.setFunction(devs.getFunction());
-                return DeveloppeurRepository.save(developpeur);}).orElse(null);
+                return developpeurRepository.save(developpeur);}).orElse(null);
     }
 }
