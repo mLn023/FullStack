@@ -26,11 +26,11 @@ public class Developpeur {
     private String function;
 
     @OneToMany(mappedBy = "developpeur")
-    @JsonManagedReference
+    @JsonManagedReference("bugs")
     private List<Bug> listebugs;
 
     @OneToMany(mappedBy = "developpeur")
-    @JsonManagedReference
+    @JsonManagedReference("coms")
     private List<Commentary> listecoms;
 
 
