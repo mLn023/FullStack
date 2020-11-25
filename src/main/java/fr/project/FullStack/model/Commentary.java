@@ -21,9 +21,9 @@ public class Commentary {
     private String created_at;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference("coms")
     private Developpeur developpeur;
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference("comsbug")
     private Bug bug;
 }

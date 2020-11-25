@@ -30,12 +30,12 @@ public class Bug {
     private String created_at;
 
     @ManyToOne
-    @JsonBackReference
+    @JsonBackReference("bugs")
     @JoinColumn(name="developpeur_id")
     private Developpeur developpeur;
 
     @OneToMany(mappedBy = "bug")
-    @JsonManagedReference
+    @JsonManagedReference("comsbug")
     private List<Commentary> listecoms;
 
 }

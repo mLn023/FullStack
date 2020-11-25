@@ -38,7 +38,7 @@ public class DeveloppeursRoute {
                 .build());
     }
 
-    @PutMapping(value = "/devs/{id}",consumes = {"application/json"})
+    @PutMapping(value = "/devs/{id}")
     public Developpeur updateDeveloppeur(@PathVariable("id") Integer id, @Validated @RequestBody Developpeur devs)
     {
         if(!developpeurRepository.existsById(id)){
