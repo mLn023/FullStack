@@ -1,7 +1,7 @@
 INSERT INTO DEVELOPPEUR (name, firstname, function) VALUES
   ('Henry', 'Mhilan', 'Junior'),
   ('Hollertt', 'Marceau', 'Junior'),
-  ('Nicolas', 'Jourdain', 'Senior'),
+  ('Jourdain', 'Nicolas', 'Senior'),
   ('George', 'Lucas', 'Junior'),
   ('Nicolas', 'Cage', 'Senior'),
   ('Machin', 'Bidule', 'Junior'),

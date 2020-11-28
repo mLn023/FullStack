@@ -1,0 +1,36 @@
+<p></p>
+<h3>Listes des developpeurs</h3>
+<p></p>
+<p></p>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">First Name</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let d of developper">
+    <tr>
+      <th scope="row">{{d.id}}</th>
+      <td>{{d.name}}</td>
+      <td>{{d.firstname}}</td>
+      <td>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button type="button" class="btn btn-outline-info">Détail</button>
+          </div>
+          <div class="btn-group mr-2" role="group" aria-label="Second group">
+            <button type="button" class="btn btn-outline-warning">Modifier</button>
+          </div>
+          <div class="btn-group" role="group" aria-label="Third group">
+            <button type="button" class="btn btn-outline-danger">Supprimer</button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-container>
+  </tbody>
+</table>
