@@ -1,5 +1,6 @@
 package fr.project.FullStack.routes;
 
+import fr.project.FullStack.exception.RessourceNotFoundException;
 import fr.project.FullStack.model.CreateDeveloppeur;
 import fr.project.FullStack.model.Developpeur;
 import fr.project.FullStack.repositories.DeveloppeurRepository;
@@ -52,5 +53,17 @@ public class DeveloppeursRoute {
                 developpeur.setFirstname(devs.getFirstname());
                 developpeur.setFunction(devs.getFunction());
                 return developpeurRepository.save(developpeur);}).orElse(null);
+    }
+
+    @DeleteMapping("/devs/{id}")
+    public ResponseEntity<?> deleteDeveloppeur(@PathVariable("id") Integer id ){
+        if(!developpeurRepository.existsById(id)) {
+            throw new RessourceNotFoundException("Developpeur not found with id " + id);
+        }
+        return developpeurRepository.findById(id)
+                .map(developpeur -> {
+                    developpeurRepository.delete(developpeur);
+                    return ResponseEntity.ok().build();
+                }).orElseThrow(()->new RessourceNotFoundException("Developpeur not found with id" + id));
     }
 }

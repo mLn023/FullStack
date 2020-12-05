@@ -25,11 +25,11 @@ public class Developpeur {
     private String firstname;
     private String function;
 
-    @OneToMany(mappedBy = "developpeur")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "developpeur")
     @JsonManagedReference("bugs")
     private List<Bug> listebugs;
 
-    @OneToMany(mappedBy = "developpeur")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "developpeur")
     @JsonManagedReference("coms")
     private List<Commentary> listecoms;
 
