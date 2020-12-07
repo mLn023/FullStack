@@ -29,12 +29,12 @@ public class Bug {
     private String status;
     private String created_at;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference("bugs")
     @JoinColumn(name="developpeur_id")
     private Developpeur developpeur;
 
-    @OneToMany(mappedBy = "bug")
+    @OneToMany(mappedBy = "bug", cascade = CascadeType.ALL)
     @JsonManagedReference("comsbug")
     private List<Commentary> listecoms;
 

@@ -1,0 +1,8 @@
+
+<nav mat-tab-nav-bar mat-align-tabs="center" animationDuration="1000ms">
+  <a mat-tab-link *ngFor="let link of links"
+     [routerLink]="link.path"> {{link.label}} </a>
+</nav>
+
+
+<router-outlet></router-outlet>

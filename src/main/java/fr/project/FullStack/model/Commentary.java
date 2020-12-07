@@ -20,10 +20,10 @@ public class Commentary {
     //@Temporal(TemporalType.DATE)
     private String created_at;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference("coms")
     private Developpeur developpeur;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonBackReference("comsbug")
     private Bug bug;
 }

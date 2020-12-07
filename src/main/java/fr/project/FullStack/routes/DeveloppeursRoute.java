@@ -4,12 +4,15 @@ import fr.project.FullStack.exception.RessourceNotFoundException;
 import fr.project.FullStack.model.CreateDeveloppeur;
 import fr.project.FullStack.model.Developpeur;
 import fr.project.FullStack.repositories.DeveloppeurRepository;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController
@@ -57,6 +60,12 @@ public class DeveloppeursRoute {
 
     @DeleteMapping("/devs/{id}")
     public ResponseEntity<?> deleteDeveloppeur(@PathVariable("id") Integer id ){
+        developpeurRepository.deleteById(id);
+        return new ResponseEntity<Developpeur>(HttpStatus.OK);
+    }
+
+    /* @DeleteMapping("/devs/{id}")
+    public ResponseEntity<?> deleteDeveloppeur(@PathVariable("id") Integer id ){
         if(!developpeurRepository.existsById(id)) {
             throw new RessourceNotFoundException("Developpeur not found with id " + id);
         }
@@ -65,5 +74,5 @@ public class DeveloppeursRoute {
                     developpeurRepository.delete(developpeur);
                     return ResponseEntity.ok().build();
                 }).orElseThrow(()->new RessourceNotFoundException("Developpeur not found with id" + id));
-    }
+    } */
 }
