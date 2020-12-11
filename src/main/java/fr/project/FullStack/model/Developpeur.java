@@ -1,6 +1,7 @@
 package fr.project.FullStack.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,18 +21,19 @@ import java.util.List;
 @Table(name="Developpeur")
 public class Developpeur {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     private String name;
     private String firstname;
     private String function;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "developpeur")
-    @JsonManagedReference("bugs")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "developpeur", orphanRemoval = true)
+    @JsonIgnoreProperties({"listebugs","listecoms"})
     private List<Bug> listebugs;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "developpeur")
-    @JsonManagedReference("coms")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "developpeur", orphanRemoval = true)
+    @JsonIgnoreProperties("coms")
     private List<Commentary> listecoms;
+
 
 
 }

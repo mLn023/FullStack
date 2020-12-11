@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,7 +14,8 @@ import lombok.Setter;
 public class CreateBug {
     private String name;
     private String priority;
-    private String status;
+    private int status;
     private String description;
-    private String created_at;
+    private Date created_at;
+    private Integer developpeur_id;
 }

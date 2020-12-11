@@ -4,15 +4,15 @@ import fr.project.FullStack.exception.RessourceNotFoundException;
 import fr.project.FullStack.model.CreateDeveloppeur;
 import fr.project.FullStack.model.Developpeur;
 import fr.project.FullStack.repositories.DeveloppeurRepository;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.xml.ws.Response;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -20,6 +20,7 @@ public class DeveloppeursRoute {
 
     @Autowired
     DeveloppeurRepository developpeurRepository;
+
 
     @GetMapping("/devs/{id}")
     public Developpeur getDeveloppeur(@PathVariable("id") Integer id) {
@@ -33,7 +34,8 @@ public class DeveloppeursRoute {
     }
 
     @PostMapping("/devs")
-    public Developpeur CreateDeveloppeur (@Validated @RequestBody CreateDeveloppeur nouveauDev){
+    public Developpeur CreateDeveloppeur (@Validated @RequestBody CreateDeveloppeur nouveauDev) throws IOException{
+
         return developpeurRepository.save(Developpeur
         .builder()
                 .name(nouveauDev.getName())
@@ -42,7 +44,8 @@ public class DeveloppeursRoute {
                 .build());
     }
 
-    @PutMapping(value = "/devs/{id}")
+
+    @PutMapping("/devs/{id}")
     public Developpeur updateDeveloppeur(@PathVariable("id") Integer id, @Validated @RequestBody Developpeur devs)
     {
         if(!developpeurRepository.existsById(id)){
@@ -55,16 +58,11 @@ public class DeveloppeursRoute {
                 developpeur.setName(devs.getName());
                 developpeur.setFirstname(devs.getFirstname());
                 developpeur.setFunction(devs.getFunction());
+                //developpeur.setProfilePic(devs.getProfilePic());
                 return developpeurRepository.save(developpeur);}).orElse(null);
     }
 
     @DeleteMapping("/devs/{id}")
-    public ResponseEntity<?> deleteDeveloppeur(@PathVariable("id") Integer id ){
-        developpeurRepository.deleteById(id);
-        return new ResponseEntity<Developpeur>(HttpStatus.OK);
-    }
-
-    /* @DeleteMapping("/devs/{id}")
     public ResponseEntity<?> deleteDeveloppeur(@PathVariable("id") Integer id ){
         if(!developpeurRepository.existsById(id)) {
             throw new RessourceNotFoundException("Developpeur not found with id " + id);
@@ -74,5 +72,5 @@ public class DeveloppeursRoute {
                     developpeurRepository.delete(developpeur);
                     return ResponseEntity.ok().build();
                 }).orElseThrow(()->new RessourceNotFoundException("Developpeur not found with id" + id));
-    } */
+    }
 }

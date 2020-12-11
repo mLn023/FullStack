@@ -1,7 +1,9 @@
 package fr.project.FullStack.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,13 +19,14 @@ public class Commentary {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String description;
-    //@Temporal(TemporalType.DATE)
-    private String created_at;
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    private Date created_at;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference("coms")
+    @ManyToOne
+    @JsonIgnoreProperties({"listebugs","listecoms" })
     private Developpeur developpeur;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference("comsbug")
+    @JsonIgnoreProperties({"developper", "listecoms"})
     private Bug bug;
 }

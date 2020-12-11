@@ -4,13 +4,16 @@ package fr.project.FullStack.model;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -26,16 +29,18 @@ public class Bug {
     private String name;
     private String description;
     private String priority;
-    private String status;
-    private String created_at;
+    private int status;
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    private Date created_at;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference("bugs")
+    @ManyToOne
+    @JsonIgnoreProperties({"listecoms", "listebugs"})
     @JoinColumn(name="developpeur_id")
     private Developpeur developpeur;
 
-    @OneToMany(mappedBy = "bug", cascade = CascadeType.ALL)
-    @JsonManagedReference("comsbug")
+    @OneToMany(mappedBy = "bug", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties({"bug"})
     private List<Commentary> listecoms;
 
 }

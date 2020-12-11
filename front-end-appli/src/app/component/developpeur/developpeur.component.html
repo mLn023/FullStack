@@ -1,5 +1,5 @@
-<div class="mat-elevation-z8">
-
+<app-developpeur-create></app-developpeur-create>
+<div class="mat-elevation-z8">  
 
     <table mat-table [dataSource]="dataSource" matSort>
 
@@ -21,7 +21,7 @@
         <ng-container matColumnDef="details">
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-header *matCellDef="let developpeur"> 
-            <button mat-icon-button><img height="30" width="30" src="https://www.flaticon.com/svg/static/icons/svg/639/639375.svg"></button>
+            <button mat-icon-button (click)="openDialog(developpeur)"><img height="30" width="30" src="https://www.flaticon.com/svg/static/icons/svg/639/639375.svg"></button>
             <button mat-icon-button><img height="30" width="30" src="https://www.flaticon.com/svg/static/icons/svg/3388/3388936.svg"></button>
             <button mat-icon-button (click)="deleteDeveloppeur(developpeur.id)"><img height="30" width="30" src="https://www.flaticon.com/svg/static/icons/svg/3455/3455951.svg"></button> 
           </td>

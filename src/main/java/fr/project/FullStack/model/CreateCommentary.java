@@ -13,6 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateCommentary {
+    private Integer bug_id;
     private String description;
     private Date created_at;
+    private Integer developpeur_id;
 }

@@ -4,7 +4,8 @@ import { DeveloppeurService } from 'src/app/services/developpeur.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, } from '@angular/material/dialog';
+import { DeveloppeurDetailComponent } from '../developpeur-detail/developpeur-detail.component';
 
 
 @Component({
@@ -14,8 +15,10 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class DeveloppeurComponent implements  AfterViewInit {
 
-  public developpeurs: Developpeur[] = [];
+  public developpeurs!: Developpeur[];
+  public devsUnit!: Developpeur;
   displayedColumns: string[] = ['ID', 'name', 'firstname', 'details'];
+
   dataSource!: MatTableDataSource<Developpeur>;
   
   @ViewChild(MatPaginator)
@@ -24,12 +27,13 @@ export class DeveloppeurComponent implements  AfterViewInit {
   @ViewChild(MatSort) 
   sort!: MatSort;
 
-  constructor(private devsServices: DeveloppeurService) { 
+  constructor(private devsServices: DeveloppeurService, public dialog: MatDialog) { 
     this.devsServices.getDeveloppeursList().subscribe((devsReponse => {
       this.dataSource = new MatTableDataSource(devsReponse);
       setTimeout(() => this.dataSource.paginator = this.paginator);
     }));
   }
+
 
 
   deleteDeveloppeur(id: number): void{
@@ -39,10 +43,23 @@ export class DeveloppeurComponent implements  AfterViewInit {
       //TODO
     })
   }
+  
+
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
+  openDialog(developper:any): void {
+    const dialogRef = this.dialog.open(DeveloppeurDetailComponent, {
+      width: '330px',
+      height: '400px',
+      data: {
+        name: developper.name,
+        firstname: developper.firstname,
+        function: developper.function
+      }
+    });
+  }
 }

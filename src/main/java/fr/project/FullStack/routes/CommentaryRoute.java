@@ -3,16 +3,15 @@ package fr.project.FullStack.routes;
 import fr.project.FullStack.exception.RessourceNotFoundException;
 import fr.project.FullStack.model.Bug;
 import fr.project.FullStack.model.Commentary;
+import fr.project.FullStack.model.CreateCommentary;
 import fr.project.FullStack.model.Developpeur;
 import fr.project.FullStack.repositories.BugRepository;
 import fr.project.FullStack.repositories.CommentaryRepository;
 import fr.project.FullStack.repositories.DeveloppeurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
 import java.util.List;
@@ -54,7 +53,38 @@ public class CommentaryRoute {
 
     }
 
-    @DeleteMapping("/commentary/{id}")
+
+
+    @PostMapping("bugs/{id}")
+    public Commentary CreateCommentary (@PathVariable ("id") Integer id,
+                                        @Validated @RequestBody CreateCommentary nouveauCommentary){
+        if(!bugRepository.existsById(id)) {
+            // Exception A faire
+        }
+
+        return commentaryRepository.save(Commentary
+                .builder()
+                    .description(nouveauCommentary.getDescription())
+                    .bug(bugRepository.findById(id).get())
+                    .developpeur(developpeurRepository.findById(nouveauCommentary.getDeveloppeur_id()).get())
+                    .build());
+    }
+
+    @PutMapping("commentary/{id}")
+    public Commentary updateCommentary(@PathVariable("id") Integer id,
+                                       @Validated @RequestBody Commentary commentary){
+        if(!commentaryRepository.existsById(id)){
+            // exception a faire
+            return null;
+        }
+
+        return commentaryRepository.findById(id)
+                .map(updateCommentary -> {
+                    updateCommentary.setDescription(commentary.getDescription());
+                return commentaryRepository.save(updateCommentary);}).orElse(null);
+    }
+
+    @DeleteMapping("commentary/{id}")
     public ResponseEntity<?> deleteCommentary(@PathVariable("id") Integer id ){
         if(!commentaryRepository.existsById(id)) {
             throw new RessourceNotFoundException("Commentary not found with id " + id);

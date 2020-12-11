@@ -16,6 +16,10 @@ export class DeveloppeurService {
     return this.http.get<Developpeur[]>(`${environment.url}/devs`);
   }
 
+  public getDeveloppeurById(id: number): Observable<Developpeur> {
+    return this.http.get<Developpeur>(`${environment.url}/devs/${id}`);
+  }
+
   public deleteDeveloppeur(id: number): Observable<any> {
     return this.http.delete(`${environment.url}/devs/${id}`);
   }
